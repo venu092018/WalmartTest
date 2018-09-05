@@ -1,0 +1,48 @@
+<div>
+  <div class="{{waitingOnDataLoad ? '':'d-none'}}" style="position:fixed; z-index: 100; top:50%; left:50%;margin:-100px 0 0 -100px;">
+    <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px;color:rgb(119, 184, 225)"></i>
+  </div>
+  <div *ngIf="product" class="row mt-2">
+    <div class="col-md-6">
+      <img [src]="product.largeImage" class="mt-2"
+           [title]="product.name" alt="product.name" />
+    </div>
+    <div class="col-md-6">
+
+      <h4>{{product.name}}</h4>
+
+      <div *ngIf="product.customerRatingImage" class="mt-2">
+        <img [src]="product.customerRatingImage" />
+        {{product.numReviews}}
+      </div>
+
+      <div class="mt-2">
+        <p class="font-weight-bold">{{product.salePrice | currency:'USD'}}</p>
+      </div>
+
+      <div [innerHTML]="product.shortDescription">
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="recommendedProducts && recommendedProducts.length > 0" class="mt-4 pt-4 border-top">
+    <h3>Customers also considered</h3>
+    <div class="row mt-2" style="display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;">
+
+      <div class="col-sm-3" *ngFor="let recommendedProduct of recommendedProducts">
+        <a [routerLink]="['/products', recommendedProduct.itemId]">
+          <img [src]="recommendedProduct.thumbnailImage" style="width:100px;height:100px"
+               [title]="recommendedProduct.name" alt="recommendedProduct.name" />
+        </a>
+        <div class="mt-2">
+          <a [routerLink]="['/products', recommendedProduct.itemId]">
+            <p>{{ (recommendedProduct.name.length > 40)? (recommendedProduct.name | slice:0:30) + '..' : (recommendedProduct.name)    }}</p>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

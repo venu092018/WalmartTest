@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="table-responsive">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>
+            <a [routerLink]="['/']">
+              <img src="./assets/images/wmt_h_r_c.jpg"
+                   class="img-responsive pull-left" style="max-height:70px;" />
+            </a>
+          </td>
+          <td style="vertical-align:middle">
+            <div class="input-group row">
+              <input type="text" class="form-control" placeholder="Search&hellip;"
+                     [(ngModel)]="productSearchQuery">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-default"
+                        (click)="onSearch()">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

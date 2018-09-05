@@ -1,0 +1,34 @@
+<div class="{{waitingOnDataLoad ? '':'d-none'}}" style="position:fixed; z-index: 100; top:50%; left:50%;margin:-100px 0 0 -100px;">
+  <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px;color:rgb(119, 184, 225)"></i>
+</div>
+
+<div *ngIf="products">
+
+
+  <div class="row border-bottom pb-2" *ngFor="let product of products"
+       style="margin-top:10px;margin-bottom:10px;width:100%;">
+    <div class="col-md-3">
+
+      <a [routerLink]="['/products', product.itemId]">
+        <img [src]="product.mediumImage"
+             [title]="product.name" alt="product.name" />
+      </a>
+    </div>
+    <div class="col-md-6">
+      <a [routerLink]="['/products', product.itemId]">
+        <h4>{{product.name}}</h4>
+      </a>
+      <div *ngIf="product.customerRatingImage" class="mt-2">
+        <img [src]="product.customerRatingImage" />
+        {{product.numReviews}}
+      </div>
+
+      <div [innerHTML]="product.shortDescription">
+      </div>
+    </div>
+    <div class="col-md-3">
+      <p class="font-weight-bold">{{product.salePrice | currency:'USD'}}</p>
+    </div>
+  </div>
+
+</div>
