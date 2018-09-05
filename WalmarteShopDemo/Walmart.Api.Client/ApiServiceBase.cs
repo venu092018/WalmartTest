@@ -29,7 +29,7 @@ namespace Walmart.Api.Client
                 apiResponse.HasError = true;
                 apiResponse.ErrorMessage = exceptionDetail.Details;
                 apiResponse.ErrorCode = exceptionDetail.StatusCode;
-                apiResponse.Response = JsonConvert.DeserializeObject<T>(apiResponse.ErrorMessage ?? string.Empty);
+                apiResponse.Response = null;
                 return apiResponse;
             }
 

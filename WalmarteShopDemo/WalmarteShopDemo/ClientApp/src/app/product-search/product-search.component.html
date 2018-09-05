@@ -2,6 +2,17 @@
   <i class="fa fa-circle-o-notch fa-spin" style="font-size:50px;color:rgb(119, 184, 225)"></i>
 </div>
 
+<div *ngIf="showNoProductsMatchedMessage">
+  <div class="alert alert-warning" role="alert">
+    Sorry, no products matched
+    <ul>
+      <li>Check your spelling</li>
+      <li>Use different keywords and try again</li>
+      <li>Contact your local store</li>
+    </ul>
+  </div>
+</div>
+
 <div *ngIf="products">
 
 

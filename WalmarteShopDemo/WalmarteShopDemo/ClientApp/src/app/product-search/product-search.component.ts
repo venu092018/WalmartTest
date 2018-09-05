@@ -12,6 +12,7 @@ export class ProductSearchComponent implements OnInit {
   _productSearchQuery: string;
 
   waitingOnDataLoad: boolean = false;
+  showNoProductsMatchedMessage: boolean = false;
 
   errorMessage: string = "";
   public products: IProductInfoFull[];
@@ -36,9 +37,12 @@ export class ProductSearchComponent implements OnInit {
 
   loadProducts() {
     this.waitingOnDataLoad = true;
+    this.showNoProductsMatchedMessage = false;
     this._productSearchService.getProducts(this.productSearchQuery)
       .subscribe(products => {
         this.products = products;
+        if (products && (products.length < 1))
+          this.showNoProductsMatchedMessage = true;
       },
         error => { this.errorMessage = <any>error; },
         () => { this.waitingOnDataLoad = false; });

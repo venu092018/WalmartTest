@@ -59,5 +59,43 @@ namespace WalmarteShopDemo.Tests
             Assert.Equal(result.Name, result.Name);
             mockApiService.VerifyAll();
         }
+
+        [Fact]
+        public void ReturnOkObjectActionResult()
+        {
+            //Arrange
+            var mockLogger = new Mock<ILogger<WalmartProductDataController>>();
+            var mockApiService = new Mock<IWalmartApiService>();
+
+            var itemId = 123;
+
+            var productLookupApiResponse = new WalmartApiResponse<ProductLookupResult>
+            {
+                HasError = false,
+                Response = new ProductLookupResult
+                {
+                    items = new List<FullResponseItem>
+                    {
+                        new FullResponseItem
+                        {
+                            ItemId = itemId
+                        }
+                    }
+                }
+            };
+
+            mockApiService.Setup(s => s.GetProductDetailAsync(
+                It.Is<ProductLookupRequestInput>(lookupParam => lookupParam.ids.Count == 1
+                                    && lookupParam.ids.Contains(123))))
+                .Returns(Task<WalmartApiResponse<ProductLookupResult>>.FromResult(productLookupApiResponse));
+            var controller = new WalmartProductDataController(mockApiService.Object, mockLogger.Object);
+
+            //Act
+            var result = controller.ProductLookup(itemId).Result;
+
+            //Assert
+            Assert.IsType<OkObjectResult>(result);
+            mockApiService.VerifyAll();
+        }
     }
 }
