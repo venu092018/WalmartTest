@@ -32,5 +32,5 @@ There are two Unit test projects in the solution.
 1)	Change working directory to [repository local path root] 
 2)	Change working directory to WalmartTest\WalmarteShopDemo\Walmart.Api.Client.Tests
 3)	Run command – dotnet test
-4)	Change working directory to WalmartTest\WalmarteShopDemo\ WalmarteShopDemo.Tests
+4)	Change working directory to WalmartTest\WalmarteShopDemo\WalmarteShopDemo.Tests
 5)	Run command – dotnet test
